@@ -1,0 +1,14 @@
+{
+    "produtos": [
+      { "id": 1, "nome": "Produto 1", "categoria": "Eletrônicos" },
+      { "id": 2, "nome": "Produto 2", "categoria": "Eletrônicos" }
+    ],
+    "categorias": [
+      { "id": 1, "nome": "Eletrônicos" },
+      { "id": 2, "nome": "Acessórios" }
+    ],
+    "avaliacoes": [
+      { "id": 1, "produto_id": 1, "comentario": "Ótimo produto!", "avaliacao": 5 },
+      { "id": 2, "produto_id": 2, "comentario": "Produto satisfatório", "avaliacao": 4 }
+    ]
+  }
