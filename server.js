@@ -6,6 +6,10 @@ const fs = require('fs');
 const app = express();
 const port = 3000;
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 // Função para ler o arquivo JSON
 function lerArquivoJson(nomeArquivo) {
   const filePath = path.join(__dirname, nomeArquivo);
@@ -17,43 +21,92 @@ function lerArquivoJson(nomeArquivo) {
     return [];
   }
 }
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+
 // Função para escrever no arquivo JSON
 function escreverArquivoJson(nomeArquivo, dados) {
   const filePath = path.join(__dirname, nomeArquivo);
   fs.writeFileSync(filePath, JSON.stringify(dados, null, 2));
 }
 
-// Função para obter a lista de produtos
-app.get('/produtos', (req, res) => {
-  const produtos = lerArquivoJson('db.json');
-  res.json(produtos);
+// Rota para obter a lista de usuários
+app.get('/usuarios', (req, res) => {
+  const usuarios = lerArquivoJson('db.json');
+  res.json(usuarios);
 });
 
-// Função para adicionar um novo produto
-app.post('/produtos', (req, res) => {
-  const produtos = lerArquivoJson('db.json');
+// Rota para obter um usuário específico
+app.get('/usuarios/:id', (req, res) => {
+  const usuarios = lerArquivoJson('db.json');
+  const usuarioId = parseInt(req.params.id);
+  const usuario = usuarios.find(u => u.id === usuarioId);
 
-  // Lógica para criar um novo produto
-  const novoProduto = { id: produtos.length + 1, nome: 'Novo Produto', categoria: 'Eletrônicos' };
-  produtos.push(novoProduto);
-
-  // Escreve os produtos atualizados de volta no arquivo db.json
-  escreverArquivoJson('db.json', produtos);
-
-  res.status(201).json(novoProduto);
+  if (usuario) {
+    res.json(usuario);
+  } else {
+    res.status(404).json({ mensagem: 'Usuário não encontrado' });
+  }
 });
 
-// Função para configurar o Swagger
+// Rota para criar um novo usuário
+app.post('/usuarios', (req, res) => {
+  const usuarios = lerArquivoJson('db.json');
+
+  // Lógica para criar um novo usuário (ajuste conforme necessário)
+  const novoUsuario = { id: usuarios.length + 1, nome_usuario: req.body.nome_usuario, email: req.body.email, playlists: [] };
+  usuarios.push(novoUsuario);
+
+  // Escreve os usuários atualizados de volta no arquivo db.json
+  escreverArquivoJson('db.json', usuarios);
+
+  res.status(201).json(novoUsuario);
+});
+
+// Rota para atualizar um usuário existente
+app.put('/usuarios/:id', (req, res) => {
+  const usuarios = lerArquivoJson('db.json');
+  const usuarioId = parseInt(req.params.id);
+  const usuarioIndex = usuarios.findIndex(u => u.id === usuarioId);
+
+  if (usuarioIndex !== -1) {
+    // Lógica para atualizar um usuário (ajuste conforme necessário)
+    usuarios[usuarioIndex].nome_usuario = req.body.nome_usuario;
+
+    // Escreve os usuários atualizados de volta no arquivo db.json
+    escreverArquivoJson('db.json', usuarios);
+
+    res.json({ mensagem: 'Usuário atualizado com sucesso', usuario: usuarios[usuarioIndex] });
+  } else {
+    res.status(404).json({ mensagem: 'Usuário não encontrado' });
+  }
+});
+
+// Rota para excluir um usuário
+app.delete('/usuarios/:id', (req, res) => {
+  const usuarios = lerArquivoJson('db.json');
+  const usuarioId = parseInt(req.params.id);
+  const usuarioIndex = usuarios.findIndex(u => u.id === usuarioId);
+
+  if (usuarioIndex !== -1) {
+    // Lógica para excluir um usuário (ajuste conforme necessário)
+    usuarios.splice(usuarioIndex, 1);
+
+    // Escreve os usuários atualizados de volta no arquivo db.json
+    escreverArquivoJson('db.json', usuarios);
+
+    res.status(204).send();
+  } else {
+    res.status(404).json({ mensagem: 'Usuário não encontrado' });
+  }
+});
+
+// Configuração do Swagger
 const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Sua API Node.js',
+      title: 'Plataforma de Streaming de Música API',
       version: '1.0.0',
-      description: 'Descrição da sua API',
+      description: 'Uma API para gerenciar músicas, playlists, artistas e usuários.',
     },
   },
   apis: ['openapi.yaml'],

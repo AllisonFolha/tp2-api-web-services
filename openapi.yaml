@@ -1,285 +1,296 @@
 openapi: 3.0.0
 info:
-  title: Sua API Node.js
+  title: Plataforma de Streaming de Música API
   version: 1.0.0
-  description: Descrição da sua API
+  description: Uma API para gerenciar músicas, playlists, artistas e usuários.
 
 paths:
-  /:
+  /usuarios:
     get:
-      summary: Retorna uma mensagem de boas-vindas
+      summary: Lista todos os usuários
       responses:
         '200':
-          description: OK
-
-  /produtos:
-    get:
-      summary: Retorna uma lista de produtos
-      responses:
-        '200':
-          description: OK
+          description: Sucesso
           content:
             application/json:
-              example:
-                - id: 1
-                  nome: 'Produto 1'
-                  categoria: 'Eletrônicos'
-                - id: 2
-                  nome: 'Produto 2'
-                  categoria: 'Eletrônicos'
+              example: { "usuarios": [...] }
+
     post:
-      summary: Cria um novo produto
+      summary: Cria um novo usuário
       requestBody:
         required: true
         content:
           application/json:
-            example:
-              nome: 'Novo Produto'
-              categoria: 'Eletrônicos'
+            example: { "nome_usuario": "novousuario", "email": "novousuario@email.com" }
       responses:
         '201':
-          description: Created
+          description: Usuário criado com sucesso
           content:
             application/json:
-              example:
-                id: 3
-                nome: 'Novo Produto'
-                categoria: 'Eletrônicos'
+              example: { "mensagem": "Usuário criado com sucesso", "usuario": {...} }
 
-  /produtos/{id}:
+  /usuarios/{usuarioId}:
     get:
-      summary: Retorna detalhes de um produto pelo ID
+      summary: Obtém detalhes de um usuário específico
       parameters:
-        - in: path
-          name: id
+        - name: usuarioId
+          in: path
           required: true
-          description: ID do produto
+          description: ID do usuário
           schema:
             type: integer
       responses:
         '200':
-          description: OK
+          description: Sucesso
           content:
             application/json:
-              example:
-                id: 1
-                nome: 'Produto 1'
-                categoria: 'Eletrônicos'
+              example: { "usuario": {...} }
+
     put:
-      summary: Atualiza os detalhes de um produto pelo ID
+      summary: Atualiza um usuário existente
       parameters:
-        - in: path
-          name: id
+        - name: usuarioId
+          in: path
           required: true
-          description: ID do produto
+          description: ID do usuário
           schema:
             type: integer
       requestBody:
         required: true
         content:
           application/json:
-            example:
-              nome: 'Produto Atualizado'
-              categoria: 'Eletrônicos'
+            example: { "nome_usuario": "novonome" }
       responses:
         '200':
-          description: OK
+          description: Usuário atualizado com sucesso
           content:
             application/json:
-              example:
-                id: 1
-                nome: 'Produto Atualizado'
-                categoria: 'Eletrônicos'
+              example: { "mensagem": "Usuário atualizado com sucesso", "usuario": {...} }
+
     delete:
-      summary: Exclui um produto pelo ID
+      summary: Exclui um usuário
       parameters:
-        - in: path
-          name: id
+        - name: usuarioId
+          in: path
           required: true
-          description: ID do produto
+          description: ID do usuário
           schema:
             type: integer
       responses:
         '204':
-          description: No Content
+          description: Usuário excluído com sucesso
 
-  /categorias:
+  /usuarios/{usuarioId}/playlists:
     get:
-      summary: Retorna uma lista de categorias
+      summary: Lista todas as playlists de um usuário
+      parameters:
+        - name: usuarioId
+          in: path
+          required: true
+          description: ID do usuário
+          schema:
+            type: integer
       responses:
         '200':
-          description: OK
+          description: Sucesso
           content:
             application/json:
-              example:
-                - id: 1
-                  nome: 'Eletrônicos'
-                - id: 2
-                  nome: 'Acessórios'
+              example: { "playlists": [...] }
+
     post:
-      summary: Cria uma nova categoria
+      summary: Cria uma nova playlist para um usuário
+      parameters:
+        - name: usuarioId
+          in: path
+          required: true
+          description: ID do usuário
+          schema:
+            type: integer
       requestBody:
         required: true
         content:
           application/json:
-            example:
-              nome: 'Nova Categoria'
+            example: { "titulo": "Nova Playlist" }
       responses:
         '201':
-          description: Created
+          description: Playlist criada com sucesso
           content:
             application/json:
-              example:
-                id: 3
-                nome: 'Nova Categoria'
+              example: { "mensagem": "Playlist criada com sucesso", "playlist": {...} }
 
-  /categorias/{id}:
+  /playlists/{playlistId}:
     get:
-      summary: Retorna detalhes de uma categoria pelo ID
+      summary: Obtém detalhes de uma playlist específica
       parameters:
-        - in: path
-          name: id
+        - name: playlistId
+          in: path
           required: true
-          description: ID da categoria
+          description: ID da playlist
           schema:
             type: integer
       responses:
         '200':
-          description: OK
+          description: Sucesso
           content:
             application/json:
-              example:
-                id: 1
-                nome: 'Eletrônicos'
+              example: { "playlist": {...} }
+
     put:
-      summary: Atualiza os detalhes de uma categoria pelo ID
+      summary: Atualiza uma playlist existente
       parameters:
-        - in: path
-          name: id
+        - name: playlistId
+          in: path
           required: true
-          description: ID da categoria
+          description: ID da playlist
           schema:
             type: integer
       requestBody:
         required: true
         content:
           application/json:
-            example:
-              nome: 'Categoria Atualizada'
+            example: { "titulo": "Novo Título" }
       responses:
         '200':
-          description: OK
+          description: Playlist atualizada com sucesso
           content:
             application/json:
-              example:
-                id: 1
-                nome: 'Categoria Atualizada'
+              example: { "mensagem": "Playlist atualizada com sucesso", "playlist": {...} }
+
     delete:
-      summary: Exclui uma categoria pelo ID
+      summary: Exclui uma playlist
       parameters:
-        - in: path
-          name: id
+        - name: playlistId
+          in: path
           required: true
-          description: ID da categoria
+          description: ID da playlist
           schema:
             type: integer
       responses:
         '204':
-          description: No Content
+          description: Playlist excluída com sucesso
 
-  /avaliacoes:
+  /musicas/{musicaId}:
     get:
-      summary: Retorna uma lista de avaliações de clientes
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              example:
-                - id: 1
-                  produto_id: 1
-                  comentario: 'Ótimo produto!'
-                  avaliacao: 5
-                - id: 2
-                  produto_id: 2
-                  comentario: 'Produto satisfatório'
-                  avaliacao: 4
-    post:
-      summary: Cria uma nova avaliação de cliente
-      requestBody:
-        required: true
-        content:
-          application/json:
-            example:
-              produto_id: 1
-              comentario: 'Excelente produto!'
-              avaliacao: 5
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              example:
-                id: 3
-                produto_id: 1
-                comentario: 'Excelente produto!'
-                avaliacao: 5
-
-  /avaliacoes/{id}:
-    get:
-      summary: Retorna detalhes de uma avaliação de cliente pelo ID
+      summary: Obtém detalhes de uma música específica
       parameters:
-        - in: path
-          name: id
+        - name: musicaId
+          in: path
           required: true
-          description: ID da avaliação
+          description: ID da música
           schema:
             type: integer
       responses:
         '200':
-          description: OK
+          description: Sucesso
           content:
             application/json:
-              example:
-                id: 1
-                produto_id: 1
-                comentario: 'Ótimo produto!'
-                avaliacao: 5
+              example: { "musica": {...} }
+
     put:
-      summary: Atualiza os detalhes de uma avaliação de cliente pelo ID
+      summary: Atualiza uma música existente
       parameters:
-        - in: path
-          name: id
+        - name: musicaId
+          in: path
           required: true
-          description: ID da avaliação
+          description: ID da música
           schema:
             type: integer
       requestBody:
         required: true
         content:
           application/json:
-            example:
-              comentario: 'Avaliação atualizada'
-              avaliacao: 4
+            example: { "titulo": "Novo Título" }
       responses:
         '200':
-          description: OK
+          description: Música atualizada com sucesso
           content:
             application/json:
-              example:
-                id: 1
-                produto_id: 1
-                comentario: 'Avaliação atualizada'
-                avaliacao: 4
+              example: { "mensagem": "Música atualizada com sucesso", "musica": {...} }
+
     delete:
-      summary: Exclui uma avaliação de cliente pelo ID
+      summary: Exclui uma música
       parameters:
-        - in: path
-          name: id
+        - name: musicaId
+          in: path
           required: true
-          description: ID da avaliação
+          description: ID da música
           schema:
             type: integer
       responses:
         '204':
-          description: No Content
+          description: Música excluída com sucesso
+
+  /artistas:
+    get:
+      summary: Lista todos os artistas
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              example: { "artistas": [...] }
+
+    post:
+      summary: Cria um novo artista
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example: { "nome": "Novo Artista" }
+      responses:
+        '201':
+          description: Artista criado com sucesso
+          content:
+            application/json:
+              example: { "mensagem": "Artista criado com sucesso", "artista": {...} }
+
+  /artistas/{artistaId}:
+    get:
+      summary: Obtém detalhes de um artista específico
+      parameters:
+        - name: artistaId
+          in: path
+          required: true
+          description: ID do artista
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              example: { "artista": {...} }
+
+    put:
+      summary: Atualiza um artista existente
+      parameters:
+        - name: artistaId
+          in: path
+          required: true
+          description: ID do artista
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example: { "nome": "Novo Nome do Artista" }
+      responses:
+        '200':
+          description: Artista atualizado com sucesso
+          content:
+            application/json:
+              example: { "mensagem": "Artista atualizado com sucesso", "artista": {...} }
+
+    delete:
+      summary: Exclui um artista
+      parameters:
+        - name: artistaId
+          in: path
+          required: true
+          description: ID do artista
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Artista excluído com sucesso

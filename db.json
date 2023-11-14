@@ -1,14 +1,199 @@
 {
-    "produtos": [
-      { "id": 1, "nome": "Produto 1", "categoria": "Eletrônicos" },
-      { "id": 2, "nome": "Produto 2", "categoria": "Eletrônicos" }
-    ],
-    "categorias": [
-      { "id": 1, "nome": "Eletrônicos" },
-      { "id": 2, "nome": "Acessórios" }
-    ],
-    "avaliacoes": [
-      { "id": 1, "produto_id": 1, "comentario": "Ótimo produto!", "avaliacao": 5 },
-      { "id": 2, "produto_id": 2, "comentario": "Produto satisfatório", "avaliacao": 4 }
-    ]
-  }
+  "usuarios": [
+    {
+      "id": 1,
+      "nome_usuario": "ana1980",
+      "email": "ana@email.com",
+      "playlists": [
+        {
+          "id": 101,
+          "titulo": "Clássicos",
+          "musicas": [
+            {
+              "id": 1001,
+              "titulo": "Bach - Suíte para Orquestra nº 3",
+              "artista": "Johann Sebastian Bach"
+            },
+            {
+              "id": 1002,
+              "titulo": "Mozart - Sinfonia nº 40",
+              "artista": "Wolfgang Amadeus Mozart"
+            }
+          ]
+        },
+        {
+          "id": 102,
+          "titulo": "Favoritas",
+          "musicas": [
+            {
+              "id": 1003,
+              "titulo": "The Beatles - Hey Jude",
+              "artista": "The Beatles"
+            },
+            {
+              "id": 1004,
+              "titulo": "Queen - Bohemian Rhapsody",
+              "artista": "Queen"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nome_usuario": "carlos_rock",
+      "email": "carlos@email.com",
+      "playlists": [
+        {
+          "id": 103,
+          "titulo": "Rock Alternativo",
+          "musicas": [
+            {
+              "id": 1005,
+              "titulo": "Radiohead - Karma Police",
+              "artista": "Radiohead"
+            },
+            {
+              "id": 1006,
+              "titulo": "Arctic Monkeys - Do I Wanna Know?",
+              "artista": "Arctic Monkeys"
+            }
+          ]
+        },
+        {
+          "id": 104,
+          "titulo": "Anos 80",
+          "musicas": [
+            {
+              "id": 1007,
+              "titulo": "Cyndi Lauper - Time After Time",
+              "artista": "Cyndi Lauper"
+            },
+            {
+              "id": 1008,
+              "titulo": "Bon Jovi - Livin' On A Prayer",
+              "artista": "Bon Jovi"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "nome_usuario": "maria_pop",
+      "email": "maria@email.com",
+      "playlists": [
+        {
+          "id": 105,
+          "titulo": "Pop Internacional",
+          "musicas": [
+            {
+              "id": 1009,
+              "titulo": "Taylor Swift - Blank Space",
+              "artista": "Taylor Swift"
+            },
+            {
+              "id": 1010,
+              "titulo": "Ed Sheeran - Shape of You",
+              "artista": "Ed Sheeran"
+            }
+          ]
+        },
+        {
+          "id": 106,
+          "titulo": "Hits do Momento",
+          "musicas": [
+            {
+              "id": 1011,
+              "titulo": "Dua Lipa - Levitating",
+              "artista": "Dua Lipa"
+            },
+            {
+              "id": 1012,
+              "titulo": "The Weeknd - Blinding Lights",
+              "artista": "The Weeknd"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "nome_usuario": "joao_jazz",
+      "email": "joao@email.com",
+      "playlists": [
+        {
+          "id": 107,
+          "titulo": "Jazz Classics",
+          "musicas": [
+            {
+              "id": 1013,
+              "titulo": "Miles Davis - So What",
+              "artista": "Miles Davis"
+            },
+            {
+              "id": 1014,
+              "titulo": "John Coltrane - My Favorite Things",
+              "artista": "John Coltrane"
+            }
+          ]
+        },
+        {
+          "id": 108,
+          "titulo": "Blues",
+          "musicas": [
+            {
+              "id": 1015,
+              "titulo": "B.B. King - The Thrill Is Gone",
+              "artista": "B.B. King"
+            },
+            {
+              "id": 1016,
+              "titulo": "Etta James - At Last",
+              "artista": "Etta James"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "nome_usuario": "lucas_eletro",
+      "email": "lucas@email.com",
+      "playlists": [
+        {
+          "id": 109,
+          "titulo": "Eletrônica",
+          "musicas": [
+            {
+              "id": 1017,
+              "titulo": "Daft Punk - Get Lucky",
+              "artista": "Daft Punk"
+            },
+            {
+              "id": 1018,
+              "titulo": "Calvin Harris - Summer",
+              "artista": "Calvin Harris"
+            }
+          ]
+        },
+        {
+          "id": 110,
+          "titulo": "House Party",
+          "musicas": [
+            {
+              "id": 1019,
+              "titulo": "Avicii - Wake Me Up",
+              "artista": "Avicii"
+            },
+            {
+              "id": 1020,
+              "titulo": "Zedd - Clarity",
+              "artista": "Zedd"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
