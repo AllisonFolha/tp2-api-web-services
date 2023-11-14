@@ -12,6 +12,21 @@
   <div class="container">
     <h1>Bem-vindo à minha página inicial!</h1>
     <button class="btn waves-effect waves-light" onclick="openSwagger()">Abrir Documentação Swagger</button>
+
+    <!-- Formulário de Adição de Produto -->
+    <form id="addProductForm" class="mui-form">
+      <div class="mui-textfield">
+        <label for="productName">Nome do Produto</label>
+        <input type="text" id="productName" name="productName" required>
+      </div>
+
+      <div class="mui-textfield">
+        <label for="productCategory">Categoria do Produto</label>
+        <input type="text" id="productCategory" name="productCategory" required>
+      </div>
+
+      <button class="btn waves-effect waves-light" onclick="adicionarProduto()">Adicionar Produto</button>
+    </form>
   </div>
 
   <script>
@@ -22,6 +37,9 @@
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <!-- Adicione o link para o seu arquivo JavaScript -->
+  <script src="script.js"></script>
 
 </body>
 </html>
