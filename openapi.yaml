@@ -1,0 +1,285 @@
+openapi: 3.0.0
+info:
+  title: Sua API Node.js
+  version: 1.0.0
+  description: Descrição da sua API
+
+paths:
+  /:
+    get:
+      summary: Retorna uma mensagem de boas-vindas
+      responses:
+        '200':
+          description: OK
+
+  /produtos:
+    get:
+      summary: Retorna uma lista de produtos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                - id: 1
+                  nome: 'Produto 1'
+                  categoria: 'Eletrônicos'
+                - id: 2
+                  nome: 'Produto 2'
+                  categoria: 'Eletrônicos'
+    post:
+      summary: Cria um novo produto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              nome: 'Novo Produto'
+              categoria: 'Eletrônicos'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              example:
+                id: 3
+                nome: 'Novo Produto'
+                categoria: 'Eletrônicos'
+
+  /produtos/{id}:
+    get:
+      summary: Retorna detalhes de um produto pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID do produto
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                id: 1
+                nome: 'Produto 1'
+                categoria: 'Eletrônicos'
+    put:
+      summary: Atualiza os detalhes de um produto pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID do produto
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              nome: 'Produto Atualizado'
+              categoria: 'Eletrônicos'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                id: 1
+                nome: 'Produto Atualizado'
+                categoria: 'Eletrônicos'
+    delete:
+      summary: Exclui um produto pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID do produto
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: No Content
+
+  /categorias:
+    get:
+      summary: Retorna uma lista de categorias
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                - id: 1
+                  nome: 'Eletrônicos'
+                - id: 2
+                  nome: 'Acessórios'
+    post:
+      summary: Cria uma nova categoria
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              nome: 'Nova Categoria'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              example:
+                id: 3
+                nome: 'Nova Categoria'
+
+  /categorias/{id}:
+    get:
+      summary: Retorna detalhes de uma categoria pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID da categoria
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                id: 1
+                nome: 'Eletrônicos'
+    put:
+      summary: Atualiza os detalhes de uma categoria pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID da categoria
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              nome: 'Categoria Atualizada'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                id: 1
+                nome: 'Categoria Atualizada'
+    delete:
+      summary: Exclui uma categoria pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID da categoria
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: No Content
+
+  /avaliacoes:
+    get:
+      summary: Retorna uma lista de avaliações de clientes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                - id: 1
+                  produto_id: 1
+                  comentario: 'Ótimo produto!'
+                  avaliacao: 5
+                - id: 2
+                  produto_id: 2
+                  comentario: 'Produto satisfatório'
+                  avaliacao: 4
+    post:
+      summary: Cria uma nova avaliação de cliente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              produto_id: 1
+              comentario: 'Excelente produto!'
+              avaliacao: 5
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              example:
+                id: 3
+                produto_id: 1
+                comentario: 'Excelente produto!'
+                avaliacao: 5
+
+  /avaliacoes/{id}:
+    get:
+      summary: Retorna detalhes de uma avaliação de cliente pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID da avaliação
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                id: 1
+                produto_id: 1
+                comentario: 'Ótimo produto!'
+                avaliacao: 5
+    put:
+      summary: Atualiza os detalhes de uma avaliação de cliente pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID da avaliação
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              comentario: 'Avaliação atualizada'
+              avaliacao: 4
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                id: 1
+                produto_id: 1
+                comentario: 'Avaliação atualizada'
+                avaliacao: 4
+    delete:
+      summary: Exclui uma avaliação de cliente pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID da avaliação
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: No Content
