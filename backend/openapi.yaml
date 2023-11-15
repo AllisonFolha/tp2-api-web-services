@@ -120,7 +120,7 @@ paths:
 
   /playlists/{playlistId}:
     get:
-      summary: Obtém detalhes de uma playlist específica
+      summary: Obter detalhes de uma playlist específica
       parameters:
         - name: playlistId
           in: path
@@ -130,13 +130,24 @@ paths:
             type: integer
       responses:
         '200':
-          description: Sucesso
+          description: Retorna os detalhes da playlist
           content:
             application/json:
-              example: { "playlist": {...} }
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID da playlist
+                  nome:
+                    type: string
+                    description: Nome da playlist
+                  usuarioId:
+                    type: integer
+                    description: ID do usuário associado à playlist
 
     put:
-      summary: Atualiza uma playlist existente
+      summary: Atualizar uma playlist existente
       parameters:
         - name: playlistId
           in: path
@@ -148,30 +159,99 @@ paths:
         required: true
         content:
           application/json:
-            example: { "titulo": "Novo Título" }
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                  description: Novo nome da playlist
+                usuarioId:
+                  type: integer
+                  description: Novo ID do usuário associado à playlist
       responses:
         '200':
           description: Playlist atualizada com sucesso
           content:
             application/json:
-              example: { "mensagem": "Playlist atualizada com sucesso", "playlist": {...} }
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID da playlist
+                  mensagem:
+                    type: string
+                    description: Mensagem de sucesso
 
     delete:
-      summary: Exclui uma playlist
+      summary: Excluir uma playlist
       parameters:
         - name: playlistId
           in: path
           required: true
-          description: ID da playlist
+          description: ID da playlist a ser excluída
           schema:
             type: integer
       responses:
         '204':
           description: Playlist excluída com sucesso
+ 
+  /musicas:
+    get:
+      summary: Obter todas as músicas
+      responses:
+        '200':
+          description: Retorna todas as músicas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: ID da música
+                    titulo:
+                      type: string
+                      description: Título da música
+                    artistaId:
+                      type: integer
+                      description: ID do artista associado à música
+
+    post:
+      summary: Adicionar uma nova música
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                titulo:
+                  type: string
+                  description: Título da música
+                artistaId:
+                  type: integer
+                  description: ID do artista associado à música
+      responses:
+        '201':
+          description: Música adicionada com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID da nova música
+                  mensagem:
+                    type: string
+                    description: Mensagem de sucesso
 
   /musicas/{musicaId}:
     get:
-      summary: Obtém detalhes de uma música específica
+      summary: Obter detalhes de uma música específica
       parameters:
         - name: musicaId
           in: path
@@ -181,13 +261,24 @@ paths:
             type: integer
       responses:
         '200':
-          description: Sucesso
+          description: Retorna os detalhes da música
           content:
             application/json:
-              example: { "musica": {...} }
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID da música
+                  titulo:
+                    type: string
+                    description: Título da música
+                  artistaId:
+                    type: integer
+                    description: ID do artista associado à música
 
     put:
-      summary: Atualiza uma música existente
+      summary: Atualizar uma música existente
       parameters:
         - name: musicaId
           in: path
@@ -199,54 +290,93 @@ paths:
         required: true
         content:
           application/json:
-            example: { "titulo": "Novo Título" }
+            schema:
+              type: object
+              properties:
+                titulo:
+                  type: string
+                  description: Novo título da música
+                artistaId:
+                  type: integer
+                  description: Novo ID do artista associado à música
       responses:
         '200':
           description: Música atualizada com sucesso
           content:
             application/json:
-              example: { "mensagem": "Música atualizada com sucesso", "musica": {...} }
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID da música
+                  mensagem:
+                    type: string
+                    description: Mensagem de sucesso
 
     delete:
-      summary: Exclui uma música
+      summary: Excluir uma música
       parameters:
         - name: musicaId
           in: path
           required: true
-          description: ID da música
+          description: ID da música a ser excluída
           schema:
             type: integer
       responses:
         '204':
-          description: Música excluída com sucesso
-
+          description: Música excluída com sucesso        
+ 
   /artistas:
     get:
-      summary: Lista todos os artistas
+      summary: Obter todos os artistas
       responses:
         '200':
-          description: Sucesso
+          description: Retorna todos os artistas
           content:
             application/json:
-              example: { "artistas": [...] }
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: ID do artista
+                    nome:
+                      type: string
+                      description: Nome do artista
 
     post:
-      summary: Cria um novo artista
+      summary: Adicionar um novo artista
       requestBody:
         required: true
         content:
           application/json:
-            example: { "nome": "Novo Artista" }
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                  description: Nome do artista
       responses:
         '201':
-          description: Artista criado com sucesso
+          description: Artista adicionado com sucesso
           content:
             application/json:
-              example: { "mensagem": "Artista criado com sucesso", "artista": {...} }
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID do novo artista
+                  mensagem:
+                    type: string
+                    description: Mensagem de sucesso
 
   /artistas/{artistaId}:
     get:
-      summary: Obtém detalhes de um artista específico
+      summary: Obter detalhes de um artista específico
       parameters:
         - name: artistaId
           in: path
@@ -256,13 +386,21 @@ paths:
             type: integer
       responses:
         '200':
-          description: Sucesso
+          description: Retorna os detalhes do artista
           content:
             application/json:
-              example: { "artista": {...} }
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID do artista
+                  nome:
+                    type: string
+                    description: Nome do artista
 
     put:
-      summary: Atualiza um artista existente
+      summary: Atualizar um artista existente
       parameters:
         - name: artistaId
           in: path
@@ -274,21 +412,34 @@ paths:
         required: true
         content:
           application/json:
-            example: { "nome": "Novo Nome do Artista" }
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                  description: Novo nome do artista
       responses:
         '200':
           description: Artista atualizado com sucesso
           content:
             application/json:
-              example: { "mensagem": "Artista atualizado com sucesso", "artista": {...} }
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID do artista
+                  mensagem:
+                    type: string
+                    description: Mensagem de sucesso
 
     delete:
-      summary: Exclui um artista
+      summary: Excluir um artista
       parameters:
         - name: artistaId
           in: path
           required: true
-          description: ID do artista
+          description: ID do artista a ser excluído
           schema:
             type: integer
       responses:
