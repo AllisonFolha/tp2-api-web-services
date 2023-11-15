@@ -1,0 +1,23 @@
+/* UserListAll.css */
+.user-list-container {
+    padding: 20px;
+  }
+  
+  .user-list-header {
+    margin-bottom: 20px;
+  }
+  
+  .user-details {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+  
+  .user-details-item {
+    margin-bottom: 5px;
+  }
+  
+  .user-details-divider {
+    margin-bottom: 10px;
+  }
+  
