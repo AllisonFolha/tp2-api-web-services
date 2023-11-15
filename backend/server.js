@@ -45,33 +45,6 @@ function manipularErro(mensagem, res, error) {
   res.status(500).json({ mensagem: "Erro interno do servidor" });
 }
 
-// Rota para obter todos os usuários
-app.get("/usuarios", (req, res) => {
-  try {
-    const usuarios = lerArquivoJson("db.json");
-    res.json(usuarios);
-  } catch (error) {
-    manipularErro("Erro ao obter usuários:", res, error);
-  }
-});
-
-// Rota para obter um usuário específico
-app.get("/usuarios/:id", (req, res) => {
-  try {
-    const usuarios = lerArquivoJson("db.json");
-    const usuarioId = parseInt(req.params.id);
-    const usuario = usuarios.find((u) => u.id === usuarioId);
-
-    if (usuario) {
-      res.json(usuario);
-    } else {
-      res.status(404).json({ mensagem: "Usuário não encontrado" });
-    }
-  } catch (error) {
-    manipularErro("Erro ao obter usuário:", res, error);
-  }
-});
-
 // Rota para criar um novo usuário
 app.post("/usuarios", (req, res) => {
   try {
